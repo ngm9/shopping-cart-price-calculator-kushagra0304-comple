@@ -41,9 +41,16 @@ const displaySummary = (summary) => {
   }
 };
 
+const extractItemsFromRows = (rows) =>
+  rows.map((row) => ({
+    price: row.querySelector('.item-price')?.value.trim() ?? '',
+    qty: row.querySelector('.item-qty')?.value.trim() ?? '',
+  }));
+
 const handleCalculateClick = () => {
   const rows = getCartItemRows();
-  const summary = calculateCartSummary([]);
+  const items = extractItemsFromRows(rows);
+  const summary = calculateCartSummary(items);
   displaySummary(summary);
 };
 
